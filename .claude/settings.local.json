@@ -1,4 +1,6 @@
 {
+    "language": "turkish",
+    "responseLanguage": "tr",
     "git":  {
                 "versioning":  {
                                    "format":  "YYMMDDHHMMSS",
