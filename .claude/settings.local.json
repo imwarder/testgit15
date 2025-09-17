@@ -1,0 +1,51 @@
+{
+    "git":  {
+                "versioning":  {
+                                   "format":  "YYMMDDHHMMSS",
+                                   "sessionCommits":  true,
+                                   "enabled":  true
+                               },
+                "user":  {
+                             "email":  "emre@emre.com",
+                             "name":  "emre"
+                         },
+                "repository":  {
+                                   "branch":  "main",
+                                   "url":  "https://github.com/imwarder/testgit15",
+                                   "autoPush":  true
+                               }
+            },
+    "hooks":  {
+                  "PostToolUse":  [
+                                      {
+                                          "hooks":  [
+                                                        {
+                                                            "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\xampp\\htdocs\\vscodeprogramlari\\gittest18\\.claude\\system\\universal-hook.ps1\" -Message \"Claude degisikligi\" -HookType PostToolUse",
+                                                            "type":  "command"
+                                                        }
+                                                    ],
+                                          "matcher":  "Write|Edit|MultiEdit|Bash|Remove|Move|Copy|Create"
+                                      }
+                                  ],
+                  "Stop":  [
+                               {
+                                   "hooks":  [
+                                                 {
+                                                     "command":  "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"C:\\xampp\\htdocs\\vscodeprogramlari\\gittest18\\.claude\\system\\working-stop-hook.ps1\" -Message \"Session tamamlandi\" -HookType Stop",
+                                                     "type":  "command"
+                                                 }
+                                             ],
+                                   "matcher":  ".*"
+                               }
+                           ]
+              },
+    "permissions":  {
+                        "allow":  [
+                                      "*"
+                                  ],
+                        "deny":  [
+
+                                 ],
+                        "defaultMode":  "bypassPermissions"
+                    }
+}
