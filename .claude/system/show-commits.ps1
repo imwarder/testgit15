@@ -62,16 +62,8 @@ if ($Action -eq "list") {
     # Ilk commit'i bul
     $firstCommit = git log --reverse --oneline | Select-Object -First 1 | ForEach-Object { ($_ -split ' ')[0] }
 
-    if ($firstCommit) {
-        # Ilk commit'ten HEAD'e kadar olan commitler
-        $allCommits = git log "${firstCommit}..HEAD" --pretty=format:"%h|%cd|%s" --date=format:"%d.%m.%Y %H:%M"
-        # Ilk commit'i de dahil et
-        $firstCommitInfo = git log $firstCommit --pretty=format:"%h|%cd|%s" --date=format:"%d.%m.%Y %H:%M" -1
-        $allCommits = @($firstCommitInfo) + @($allCommits)
-    } else {
-        # Fallback: Son 50 commit
-        $allCommits = git log --pretty=format:"%h|%cd|%s" --date=format:"%d.%m.%Y %H:%M" -50
-    }
+    # Tum commitleri al (en yeni en ustte)
+    $allCommits = git log --pretty=format:"%h|%cd|%s" --date=format:"%d.%m.%Y %H:%M" --all
     $versionedCommits = @()
 
     foreach ($commit in $allCommits) {
@@ -86,7 +78,7 @@ if ($Action -eq "list") {
     }
 
     $totalCommits = $versionedCommits.Count
-    $count = $totalCommits
+    $count = 1
 
     # Notes'lari guncellemek icin fetch
     git fetch origin refs/notes/*:refs/notes/* 2>$null
@@ -94,6 +86,8 @@ if ($Action -eq "list") {
     # Aktif commit'i tespit et
     $currentHead = git rev-parse HEAD 2>$null
     $shortHead = if ($currentHead) { $currentHead.Substring(0,7) } else { "" }
+
+    # Git log zaten en yeni commit'i en ustte veriyor, ters cevirmeye gerek yok
 
     foreach ($commit in $versionedCommits) {
         $parts = $commit -split '\|'
@@ -120,7 +114,7 @@ if ($Action -eq "list") {
                 Write-Output "[$count] $date - $hash - $message"
             }
         }
-        $count--
+        $count++
     }
 
     Write-Output ""
