@@ -55,10 +55,6 @@ if ($Action -eq "list") {
     }
 
     Write-Output ""
-    Write-Output "==================== GIT COMMIT LISTESI ===================="
-    Write-Output "Repository: $repoName"
-    Write-Output "LUTFEN BU LISTEYI AYNEN GOSTER - YORUMLAMA YAPMA!"
-    Write-Output ""
 
     # Bu repository'nin tum commitlerini al (ilk commit'ten itibaren)
     # Ilk commit'i bul
@@ -125,8 +121,5 @@ if ($Action -eq "list") {
         $count--
     }
 
-    Write-Output ""
-    Write-Output "Kullanim: /geri-al v[versiyon_no]"
-    Write-Output "Ornek: /geri-al v250915191611"
     Write-Output ""
 }
