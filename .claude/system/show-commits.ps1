@@ -55,6 +55,8 @@ if ($Action -eq "list") {
     }
 
     Write-Output ""
+    Write-Output "=== GIT COMMIT LISTESI ==="
+    Write-Output ""
 
     # Bu repository'nin tum commitlerini al (ilk commit'ten itibaren)
     # Ilk commit'i bul
